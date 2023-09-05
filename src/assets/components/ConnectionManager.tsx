@@ -44,9 +44,7 @@ export default function ConnectionManager({ children } : { children:any }) {
 
     function saveData(account:string)
     {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        setProvider(provider);
-        
+        setProvider(new ethers.BrowserProvider(window.ethereum));
         setConnectionStatus(ConnectionStatuses.CONNECTED);
         setWalletAddress(account);
     }
@@ -138,7 +136,7 @@ export default function ConnectionManager({ children } : { children:any }) {
         let accounts;
         try 
         {
-            accounts = await window.ethereum.request({method: 'eth_accounts'});
+            accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
             if(accounts.length > 0)
             {
                 connected = true;
@@ -198,7 +196,6 @@ export default function ConnectionManager({ children } : { children:any }) {
                 setWindowType(Modals.WRONG_NETWORK);
                 setConnectionStatus(ConnectionStatuses.NOT_CONNECTED);
             }
-            //const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
         }
         catch(e)
         {

@@ -38,8 +38,6 @@ export default function WindowManager( { children} : { children: any })
 {
     const [windowType, setWindowType] = useState<Modals>(Modals.NOTHING);
 
-    console.log("window type: ", windowType.toString());
-
     const WindowManagerContents : Record<Modals, WindowManagerContentElement> = {
         [Modals.NOTHING]: { 
             display: false,

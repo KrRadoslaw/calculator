@@ -51,8 +51,6 @@ export default function Calculator(props : { contractName: string })
                     receipt = await contract.div(inputValue);
                     break;
             }
-            console.log("typ receipt", typeof receipt);
-            console.log(receipt);
             addPendingTransaction(receipt);
             setWindowType(Modals.NOTHING)
         }
@@ -63,7 +61,6 @@ export default function Calculator(props : { contractName: string })
     }
 
     const handleUpdateEvent = useCallback((newValue : number) => {
-        console.log("update event");
         setCalculatorValue(Number(newValue.toString()));
     }, []);
     
@@ -86,19 +83,18 @@ export default function Calculator(props : { contractName: string })
     }, [props.contractName, provider, setContract, handleUpdateEvent, setCalculatorValue]);
 
     useEffect(()=>{
-        
-        (async()=>{
+        if (!contract && connectionStatus === ConnectionStatuses.CONNECTED)
+        {
+            fetchContract();
+        }
+        /*(async()=>{
             if (!contract && connectionStatus === ConnectionStatuses.CONNECTED)
             {
                 await fetchContract();
             }
-        })();
+        })();*/
 
     }, [connectionStatus, contract, props.contractName, provider, fetchContract]);
-
-    
-
-    
 
     return (
         <div className="d-flex justify-content-center mt-5">

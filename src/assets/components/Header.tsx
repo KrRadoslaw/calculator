@@ -9,7 +9,7 @@ export default function Header() {
   useEffect(() => {
     const pending : Array<React.JSX.Element> = [];
     pendingTransactions.forEach((elemHash)=>{
-      pending.push(<HeaderTransaction key={elemHash.hash} receipt={elemHash} />)
+      pending.push(<HeaderTransaction key={ elemHash.hash } receipt={ elemHash } />)
     });
     setPendingList(pending);
   }, [pendingTransactions]);
@@ -22,13 +22,13 @@ export default function Header() {
           {connectionStatus === ConnectionStatuses.CONNECTED ? (
             String(walletAddress).substring(0, 10) + '... '
           ) : (
-            <button className="flex-item btn btn-primary" onClick={connect}>
+            <button className="flex-item btn btn-primary" onClick={ connect }>
               Connect MetaMask
             </button>
           )}
         </div>
-        <div className="position-absolute p-1 top-100 end-0 text-dark">
-          {pendingList}
+        <div className="position-absolute p-1 top-100 end-0 text-dark" style={{ zIndex : "1" }}>
+          { pendingList }
         </div>
       </nav>
     </>
